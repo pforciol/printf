@@ -72,11 +72,13 @@ char *_strcat(char *s1, char *s2)
 		}
 	}
 	if (s2 != NULL)
-		while (s2[i])
+	{
+		while (s2[j] != '\0')
 		{
 			str[i + j] = s2[j];
 			j++;
 		}
+	}
 	str[i + j] = '\0';
 	return (str);
 }
