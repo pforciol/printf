@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 /**
  * struct specs - specifiers structure containing associated funcions
