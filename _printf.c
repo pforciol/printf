@@ -21,24 +21,32 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 
-	for (i = 0; format && format[i]; i++)
+	if (!format)
+		return (-1);
+
+	while (format[i])
 	{
 		while (format[i] != '%' && format[i])
+		{
 			_putchar(format[i]);
-
-		if (format[i] == '%' && format[i + 1] != '%')
+			i++;
+		}
+	
+	/*	if (format[i] == '%' && format[i + 1] != '%')
+		{
 			for (j = 0; specs[j].spec; j++)
 			{
 				if (format[i + 1] == specs[j].spec[0])
 				{
 					temp = specs[j].func(list);
 					k = 0;
+					
 					while (temp[k])
 						_putchar(temp[k++]);
-
-
 				}
 			}
+		}
+		i++;*/
 	}
 	va_end(list);
 
