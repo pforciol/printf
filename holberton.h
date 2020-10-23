@@ -2,6 +2,7 @@
 #define HOLBERTON_H
 
 #include <unistd.h>
+#include <stdarg.h>
 
 /**
  * struct specs - specifiers structure containing associated funcions
@@ -17,7 +18,6 @@ typedef struct specs
 } specs_t;
 
 int _putchar(char c);
-
 int _printf(const char *format, ...);
 
 #endif
