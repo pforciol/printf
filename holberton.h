@@ -19,5 +19,8 @@ typedef struct specs
 
 int _putchar(char c);
 int _printf(const char *format, ...);
+char *store_char(va_list c);
+char *store_string(va_list str);
+
 
 #endif

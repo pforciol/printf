@@ -10,7 +10,7 @@
 
 char *store_char(va_list c)
 {
-	char ch = va_arg(c, int);
+	char *ch = va_arg(c, int);
 	
 	return (ch);
 }
@@ -23,12 +23,12 @@ char *store_char(va_list c)
  * Return: a string
  */
 
-void print_string(va_list str)
+char *store_string(va_list str)
 {
 	char *arg = va_arg(str, char*);
 
 	if (arg == NULL)
 		arg = "(null)";
 
-	return(arg);
+	return (arg);
 }

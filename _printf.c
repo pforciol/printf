@@ -11,28 +11,36 @@
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, j = 0;
+	int i, j, k;
 	specs_t specs[] = {
 		{"c", store_char},
-		{"s", store_string}
-	}
+		{"s", store_string},
+		{NULL, NULL}
+	};
+	char *temp;
 
 	va_start(list, format);
 
-	while (format && format[i])
+	for (i = 0; format && format[i]; i++)
 	{
-		j = 0;
-		while (specs[j].spec)
-		{
-			if (format[i] == specs[j].spec[0])
+		while (format[i] != '%' && format[i])
+			_putchar(format[i]);
+
+		if (format[i] == '%' && format[i + 1] != '%')
+			for (j = 0; specs[j].spec; j++)
 			{
-				specs[j].func(list);
+				if (format[i + 1] == specs[j].spec[0])
+				{
+					temp = specs[j].func(list);
+					k = 0;
+					while (temp[k])
+						_putchar(temp[k++]);
+
+
+				}
 			}
-			j++;
-		}
-		i++;
-	}
 
 	va_end(list);
+
 	return (0);
 }
