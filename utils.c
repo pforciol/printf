@@ -55,7 +55,7 @@ int	_strlen(char *str)
  * Return: a pointer to the new string, or NULL on failure
  */
 
-char *str_concat(char *s1, char *s2)
+char *_strcat(char *s1, char *s2)
 {
 	char *str;
 	int i = 0, j = 0;
@@ -64,11 +64,13 @@ char *str_concat(char *s1, char *s2)
 	if (!str)
 		return (NULL);
 	if (s1 != NULL)
+	{
 		while (s1[i])
 		{
 			str[i] = s1[i];
 			i++;
 		}
+	}
 	if (s2 != NULL)
 		while (s2[i])
 		{
@@ -77,4 +79,34 @@ char *str_concat(char *s1, char *s2)
 		}
 	str[i + j] = '\0';
 	return (str);
+}
+
+/**
+ * _charcat - concatenates a char to a string
+ *
+ * @str: the first string
+ * @c: the char
+ *
+ * Return: a pointer to the new string, or NULL on failure
+ */
+
+char *_charcat(char *str, char c)
+{
+	char *cat;
+	int i = 0;
+
+	cat = malloc(sizeof(char) * (_strlen(str) + 2));
+	if (!cat)
+		return (NULL);
+	if (str != NULL)
+		while (str[i])
+		{
+			cat[i] = str[i];
+			i++;
+		}
+	if (c)
+		cat[i] = c;
+	i++;
+	cat[i] = '\0';
+	return (cat);
 }
