@@ -13,8 +13,8 @@ int _printf(const char *format, ...)
 	va_list list;
 	int i = 0, j = 0;
 	specs_t specs[] = {
-		{"c", print_char},
-		{"s", print_string}
+		{"c", store_char},
+		{"s", store_string}
 	}
 
 	va_start(list, format);
