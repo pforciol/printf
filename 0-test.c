@@ -11,11 +11,9 @@ int main(void)
 {
 	int ret = 0;
 
-	printf("Expected :\n\t$ [");
 	ret = printf("Let's try to printf a simple sentence.\n");
-	printf("]\n\t> RET = %d\n", ret);
-	printf("Output :\n\t$ [");
+	printf("\n\t> RET = %d\n", ret);
 	ret = _printf("Let's try to printf a simple sentence.\n");
-	printf("]\n\t> RET = %d\n", ret);
+	printf("\n\t> RET = %d\n", ret);
 	return (0);
 }
