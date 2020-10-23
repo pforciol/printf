@@ -1,6 +1,37 @@
 #include "holberton.h"
 
 /**
+ * spec_eng - Calls the correct print function and returns a string
+ *
+ * @list: the va_list object
+ * @str: the requested specifier
+ * @prec: the requested precision
+ *
+ * Return: a string
+ */
+
+char *spec_eng(va_list list, char *str, char *prec)
+{
+	specs_t specs[] = {
+		{"c", store_char},
+		{"s", store_string},
+		{NULL, NULL}
+	};
+	int i;
+
+	if (str[0] == '%')
+		return ("%");
+
+	for (i = 0; specs[i].spec; i++)
+	{
+		if (str[0] == specs[i].spec[0])
+			return (specs[i].func(list, prec));
+	}
+
+	return (NULL);
+}
+
+/**
  * get_spec - gets the specifier of the current parameter
  *
  * @
