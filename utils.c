@@ -110,5 +110,6 @@ char *_charcat(char *str, char c)
 		cat[i] = c;
 	i++;
 	cat[i] = '\0';
+	free(str);
 	return (cat);
 }
