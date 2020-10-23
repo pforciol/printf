@@ -6,8 +6,18 @@
 /**
  * struct specs - specifiers structure containing associated funcions
  *
- * @spec: the 
+ * @spec: the specifier
+ * @func: the print function associated to the specifier
+ */
+
+typedef struct specs
+{
+	char *spec;
+	void (*func)(va_list);
+} specs_t;
 
 int _putchar(char c);
+
+int _printf(const char *format, ...);
 
 #endif
