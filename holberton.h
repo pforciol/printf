@@ -3,8 +3,11 @@
 
 #include <unistd.h>
 
-int			_putchar(char c);
-int			_puts(char *str);
-int			_strlen(char *str);
+/**
+ * struct specs - specifiers structure containing associated funcions
+ *
+ * @spec: the 
+
+int _putchar(char c);
 
 #endif
