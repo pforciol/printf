@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include "holberton.h"
 
 /**
  * _putchar - writes the character c to stdout
@@ -41,7 +41,7 @@ int	_strlen(char *str)
 	int len = 0;
 
 	if (str)
-		while (s[len])
+		while (str[len])
 			len++;
 	return (len);
 }
