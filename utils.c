@@ -47,7 +47,7 @@ int	_strlen(char *str)
 }
 
 /**
- * str_concat - concatenates two strings
+ * _strcat - concatenates two strings
  *
  * @s1: the first string
  * @s2: the second string
@@ -112,4 +112,116 @@ char *_charcat(char *str, char c)
 	cat[i] = '\0';
 	free(str);
 	return (cat);
+}
+
+/**
+ * _isalpha - checks for alphabetic characters
+ *
+ * @c: character to test (in int)
+ *
+ * Return: 1 if c is alphabetic, 0 if no
+ */
+
+int	_isalpha(int c)
+{
+	return (((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) ? 1 : 0);
+}
+
+/**
+ * _islower - checks for lowercase characters
+ *
+ * @c: character to test (in int)
+ *
+ * Return: 1 if c is lowercase, 0 if no
+ */
+
+int _islower(int c)
+{
+	return ((c >= 'a' && c <= 'z') ? 1 : 0);
+}
+
+/**
+ * _strnchr - locates a character in a string
+ *
+ * @s: the string to look inside
+ * @c: the character to find
+ * @n: the max length to look for
+ *
+ * Return: the index of the first occurence of c in s, or -1 if not found
+ */
+
+int _strnchr(char *s, char c, unsigned int n)
+{
+	unsigned int i = 0;
+
+	while (s[i] && i <= n)
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	if (s[i] == c)
+		return (i);
+	return (-1);
+}
+
+/**
+ * _isdigit - checks for digits
+ *
+ * @c: character to test (in int)
+ *
+ * Return: 1 if c is a digit, 0 if no
+ */
+
+int _isdigit(int c)
+{
+	return ((c >= '0' && c <= '9') ? 1 : 0);
+}
+
+/**
+ * rev_string - reverses a string
+ *
+ * @s: the string to be reversed
+ */
+
+void rev_string(char *str)
+{
+	int i = 0			;
+	int j = _strlen(str) - 1, max = j / 2;
+	char tmp;
+
+	while (j > max)
+	{
+		tmp = str[i];
+		str[i++] = str[j];
+		str[j--] = tmp;
+	}
+}
+
+/**
+ * _strdup - allocates a new space in memory which contains
+ * a copy of the string given as a parameter
+ *
+ * @str: the string to duplicate
+ *
+ * Return: a pointer to the new string, or NULL if str = NULL or fail
+ */
+
+char *_strdup(char *str)
+{
+	char *new_str;
+	int i = 0;
+
+	if (str == NULL)
+		return (NULL);
+	new_str = malloc(sizeof(char) * _strlen(str) + 1);
+	if (!new_str)
+		return (NULL);
+	while (str[i])
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }

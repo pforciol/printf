@@ -1,4 +1,4 @@
-#include "holberton.h"
+#nclude "holberton.h"
 
 /**
  * spec_eng - Calls the correct print function and returns a string
@@ -10,32 +10,26 @@
  * Return: a string
  */
 
-char *spec_eng(va_list list, char *str, char *prec)
-{
-	specs_t specs[] = {
-		{"c", store_char},
-		{"s", store_string},
-		{NULL, NULL}
-	};
-	int i;
+/* char *spec_eng(va_list list, char *str, char *prec)
+   {
+   specs_t specs[] = {
+   {"c", store_char},
+   {"s", store_string},
+   {NULL, NULL}
+   };
+   int i;
 
-	if (str[0] == '%')
-		return ("%");
+   if (str[0] == '%')
+   return ("%");
 
-	for (i = 0; specs[i].spec; i++)
-	{
-		if (str[0] == specs[i].spec[0])
-			return (specs[i].func(list, prec));
-	}
+   for (i = 0; specs[i].spec; i++)
+   {
+   if (str[0] == specs[i].spec[0])
+   return (specs[i].func(list, prec));
+   }
 
-	return (NULL);
-}
-
-/**
- * get_spec - gets the specifier of the current parameter
- *
- * @
- */
+   return (NULL);
+   } */
 
 /**
  * _printf - entry point for our main function
@@ -48,13 +42,9 @@ char *spec_eng(va_list list, char *str, char *prec)
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, j, len = 0;
-	char *buffer = NULL; 
-	specs_t specs[] = {
-		{"c", store_char},
-		{"s", store_string},
-		{NULL, NULL}
-	};
+	int i = 0, len = 0;
+	char *buffer = NULL;
+	spec_data_t *data;
 
 	va_start(list, format);
 
@@ -72,18 +62,24 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%')
 		{
-			for (j = 0; specs[j].spec; j++)
+			data = parse_spec(format + i);
+			if (data->len == 0)
+				buffer = _strcat(buffer, "%");
+			else if (data->spec == '%')
 			{
-				if (format[i + 1] == specs[j].spec[0])
-				{
-					buffer = _strcat(buffer, specs[j].func(list));
-					while (format[i] != ' ' && format[i])
-						i++;
-				}
+				buffer = _strcat(buffer, "%");
+				i++;
 			}
+			else if (data)
+			{
+				buffer = _strcat(buffer, "");
+				i += data->len;
+			}
+			free_spec_data(data);
 		}
 		i++;
 	}
+
 	va_end(list);
 	_puts(buffer);
 	len = _strlen(buffer);
