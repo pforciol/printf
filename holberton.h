@@ -15,7 +15,7 @@
 
 typedef struct specs
 {
-	char *spec;
+	char spec;
 	char *(*func)(va_list);
 } specs_t;
 
@@ -54,6 +54,7 @@ void rev_string(char *str);
 
 /* PRINTF */
 int _printf(const char *format, ...);
+char *spec_eng(va_list list, spec_data_t *data);
 char *store_char(va_list c);
 char *store_string(va_list str);
 spec_data_t *parse_spec(const char *format);

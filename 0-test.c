@@ -17,7 +17,7 @@ int main(void)
 	printf("\n\t> RET = %d\n\n", ret);
 	printf("----------\n");
 
-	/* ret = printf("%c", NULL);
+	ret = printf("%c", NULL);
 	printf("\n\t> RET = %d\n", ret);
 	ret = _printf("%c", NULL);
 	printf("\n\t> RET = %d\n\n", ret);
@@ -35,11 +35,17 @@ int main(void)
 	printf("\n\t> RET = %d\n\n", ret);
 	printf("----------\n");
 
+	ret = printf("%s\0%s", "Hello\0", " World");
+	printf("\n\t> RET = %d\n", ret);
+	ret = _printf("%s\0%s", "Hello\0", " World");
+	printf("\n\t> RET = %d\n\n", ret);
+	printf("----------\n");
+	
 	ret = printf("%c", 50);
 	printf("\n\t> RET = %d\n", ret);
 	ret = _printf("%c", 50);
 	printf("\n\t> RET = %d\n\n", ret);
-	printf("----------\n"); */ 
+	printf("----------\n");
 
 	ret = printf("%s", NULL);
 	printf("\n\t> RET = %d\n", ret);
@@ -63,11 +69,11 @@ int main(void)
 	printf("\n\t> RET = %d\n", ret);
 	ret = _printf("%s", " ");
 	printf("\n\t> RET = %d\n\n", ret);
-	printf("----------\n"); /*
+	printf("----------\n");
 
 	ret = printf("%s%c", "Test String and this is a char: ", 'H');
 	printf("\n\t> RET = %d\n", ret);
 	ret = _printf("%s%c", "Test String and this is a char: ", 'H');
-	printf("\n\t> RET = %d\n\n", ret); */
+	printf("\n\t> RET = %d\n\n", ret);
 	return(0);
 }

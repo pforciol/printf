@@ -4,32 +4,27 @@
  * spec_eng - Calls the correct print function and returns a string
  *
  * @list: the va_list object
- * @str: the requested specifier
- * @prec: the requested precision
+ * @data: the parsed complete specifier
  *
  * Return: a string
  */
 
-/* char *spec_eng(va_list list, char *str, char *prec)
-   {
-   specs_t specs[] = {
-   {"c", store_char},
-   {"s", store_string},
-   {NULL, NULL}
-   };
-   int i;
+char *spec_eng(va_list list, spec_data_t *data)
+{
+	specs_t specs[] = {
+		{'c', store_char},
+		{'s', store_string},
+	};
+	int i;
 
-   if (str[0] == '%')
-   return ("%");
+	for (i = 0; specs[i].spec; i++)
+	{
+		if (data->spec == specs[i].spec)
+			return (specs[i].func(list));
+	}
 
-   for (i = 0; specs[i].spec; i++)
-   {
-   if (str[0] == specs[i].spec[0])
-   return (specs[i].func(list, prec));
-   }
-
-   return (NULL);
-   } */
+	return (NULL);
+}
 
 /**
  * _printf - entry point for our main function
@@ -44,6 +39,7 @@ int _printf(const char *format, ...)
 	va_list list;
 	int i = 0, len = 0;
 	char *buffer = NULL;
+	char *tmp;
 	spec_data_t *data;
 
 	va_start(list, format);
@@ -72,7 +68,8 @@ int _printf(const char *format, ...)
 			}
 			else if (data)
 			{
-				buffer = _strcat(buffer, "");
+				tmp = spec_eng(list, data);
+				buffer = _strcat(buffer, tmp);
 				i += data->len;
 			}
 			free_spec_data(data);
@@ -81,8 +78,16 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(list);
-	_puts(buffer);
-	len = _strlen(buffer);
+	if (_strlen(buffer) == 0)
+	{
+		_putchar('\0');
+		len = 1;
+	}
+	else
+	{
+		_puts(buffer);
+		len = _strlen(buffer);
+	}
 	free(buffer);
 	return (len);
 }

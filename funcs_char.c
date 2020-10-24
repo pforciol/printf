@@ -10,8 +10,11 @@
 
 char *store_char(va_list c)
 {
-	char *ch = va_arg(c, int);
-	
+	char *ch = malloc(sizeof(char) * 2);
+
+	ch[0] = va_arg(c, int);
+	ch[1] = '\0';
+
 	return (ch);
 }
 
