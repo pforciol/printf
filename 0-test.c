@@ -11,69 +11,87 @@ int main(void)
 {
 	int ret = 0;
 
+	printf("1) Simple sentence\n");
+	ret = printf("Let's try to printf a simple sentence (just format).\n");
+	printf("> RET = %d\n", ret);
+	ret = _printf("Let's try to printf a simple sentence (just format).\n");
+	printf("> RET = %d\n\n", ret);
+	printf("----------\n");
+
+	printf("2) s format, string\n");
 	ret = printf("%s", "Let's try to printf a simple sentence.\n");
-	printf("\n\t> RET = %d\n", ret);
+	printf("> RET = %d\n", ret);
 	ret = _printf("%s", "Let's try to printf a simple sentence.\n");
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("> RET = %d\n\n", ret);
 	printf("----------\n");
 
+	printf("3) c format, NULL value\n");
 	ret = printf("%c", NULL);
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%c", NULL);
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("4) c format, \\0 value\n");
 	ret = printf("%c", '\0');
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%c", '\0');
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("5) c format, H value\n");
 	ret = printf("%c", 'H');
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%c", 'H');
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
-	ret = printf("%s\0%s", "Hello\0", " World");
-	printf("\n\t> RET = %d\n", ret);
-	ret = _printf("%s\0%s", "Hello\0", " World");
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("6) s format\\0s format, \"Hello\", \"World\"\n");
+	ret = printf("%s\0%s", "Hello", " World");
+	printf("\n> RET = %d\n", ret);
+	ret = _printf("%s\0%s", "Hello", " World");
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 	
+	printf("7) c format, 50\n");
 	ret = printf("%c", 50);
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%c", 50);
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("8) s format, NULL string\n");
 	ret = printf("%s", NULL);
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s", NULL);
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("9) s format, empty string\n");
 	ret = printf("%s", "");
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s", "");
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("10) s format, \\0 string\n");
 	ret = printf("%s", "\0");
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s", "\0");
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("11) s format, space string\n");
 	ret = printf("%s", " ");
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s", " ");
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
+	printf("s format c format, string, H\n");
 	ret = printf("%s%c", "Test String and this is a char: ", 'H');
-	printf("\n\t> RET = %d\n", ret);
+	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s%c", "Test String and this is a char: ", 'H');
-	printf("\n\t> RET = %d\n\n", ret);
+	printf("\n> RET = %d\n", ret);
 	return(0);
 }
