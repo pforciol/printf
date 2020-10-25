@@ -10,6 +10,13 @@
 int main(void)
 {
 	int ret = 0;
+	
+	printf("0) Empty format\n");
+	ret = printf("%%%%%%%%%%%%%%1");
+	printf("\n> RET = %d\n", ret);
+	ret = _printf("%%%%%%%%%%%%%%1");
+	printf("\n> RET = %d\n", ret);
+	printf("----------\n");
 
 	printf("1) Simple sentence\n");
 	ret = printf("Let's try to printf a simple sentence (just format).\n");
@@ -88,10 +95,18 @@ int main(void)
 	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 
-	printf("s format c format, string, H\n");
+	printf("12) s format c format, string, H\n");
 	ret = printf("%s%c", "Test String and this is a char: ", 'H');
 	printf("\n> RET = %d\n", ret);
 	ret = _printf("%s%c", "Test String and this is a char: ", 'H');
 	printf("\n> RET = %d\n", ret);
+	printf("----------\n");
+
+	printf("13) d format with pad + width, 5 \n");
+	ret = printf("%zzzzd", 5);
+	printf("\n> RET = %d\n", ret);
+	ret = _printf("%zzzzd", 5);
+	printf("\n> RET = %d\n", ret);
+	printf("----------\n");
 	return(0);
 }

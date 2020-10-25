@@ -7,6 +7,12 @@
 #include <stdio.h>
 
 #define BUFSIZE 1024
+#define SPECIFIERS_SIZE 23
+#define LENGTH_SPECS_SIZE 8
+
+#define ERROR -1
+#define EMPTY 0
+#define OK 1
 
 /**
  * struct spec_data - specifiers data
@@ -20,12 +26,12 @@
 
 typedef struct spec_data
 {
-	char *flags;
-	char *width;
-	char *prec;
-	char *length;
-	char spec;
-	int len;
+	char fmt_spec;
+	char *spec_length;
+	int spec_prec;
+	int spec_width;
+	char *spec_flags;
+	int fmt_len;
 } spec_data_t;
 
 /**
@@ -69,16 +75,21 @@ int _isdigit(int c);
 int _strnchr(char *s, char c, unsigned int n);
 void rev_string(char *str);
 char *_strcpy(char *dest, char *src);
+char *_strncpy(char *dest, char *src, int size);
+int _strcmp(char *s1, char *s2);
 
 /* PRINTF */
 int _printf(const char *format, ...);
 int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer);
+int is_in_format_specifiers(char c);
+
 pf_buf_t *store_char(va_list c, spec_data_t *data);
 pf_buf_t *store_string(va_list str, spec_data_t *data);
-spec_data_t *parse_spec(const char *format);
-spec_data_t *new_spec_data(
-		char spec, char *length, char *prec, char *width, char *flags, int len);
-void *free_spec_data(spec_data_t *data);
+
+/* SPEC_DATA_T */
+int spec_data_t_parse(spec_data_t *data, const char *format);
+spec_data_t *spec_data_t_new(void);
+void *spec_data_t_delete(spec_data_t *data);
 
 /* PF_BUF_T */
 pf_buf_t *pf_buf_t_new(size_t size);
@@ -86,5 +97,9 @@ void *pf_buf_t_delete(pf_buf_t *buffer);
 void pf_buf_t_add_char(pf_buf_t *buffer, char to_add);
 void pf_buf_t_flush(pf_buf_t *buffer);
 void pf_buf_t_print(pf_buf_t *buffer);
+
+/* SPECIFIERS */
+char *extract_format(const char *format, int size);
+char *extract_length(char *str);
 
 #endif

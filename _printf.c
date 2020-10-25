@@ -35,7 +35,7 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 
 	for (i = 0; specs[i].spec; i++)
 	{
-		if (data->spec == specs[i].spec)
+		if (data->fmt_spec == specs[i].spec)
 		{
 			tmp = specs[i].func(list, data);
 			if (tmp)
@@ -62,8 +62,8 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 int _printf(const char *format, ...)
 {
 	va_list list;
-	int i = 0, len = 0;
-	spec_data_t *data;
+	int i = 0, len = 0, status = OK;
+	spec_data_t *data = NULL;
 	pf_buf_t *buffer;
 	int total_len = 0;
 
@@ -87,25 +87,39 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%')
 		{
-			data = parse_spec(format + i);
-
-			if (data->len == 0)
+			data = spec_data_t_new();
+			if (data)
 			{
-				pf_buf_t_add_char(buffer, '%');
-				total_len++;
+				status = spec_data_t_parse(data, format + i);
+				if (status == OK)
+				{
+					if (data->fmt_spec == '%')
+					{
+						pf_buf_t_add_char(buffer, '%');
+						i++;
+						total_len++;
+					}
+					else
+					{
+						total_len += spec_eng(list, data, buffer);
+						i += data->fmt_len;
+					}
+				}
+				else if (status == EMPTY)
+				{
+						pf_buf_t_add_char(buffer, '%');
+						total_len++;
+				}
+				else
+				{
+					return (-1);
+				}
+				spec_data_t_delete(data);
 			}
-			else if (data->spec == '%')
+			else
 			{
-				pf_buf_t_add_char(buffer, '%');
-				i++;
-				total_len++;
+				return (-1);
 			}
-			else if (data)
-			{
-				total_len += spec_eng(list, data, buffer);
-				i += data->len;
-			}
-			free_spec_data(data);
 		}
 		i++;
 	}
