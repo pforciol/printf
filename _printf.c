@@ -1,5 +1,19 @@
 #include "holberton.h"
 
+void add_to_buf(pf_buf_t *buffer, char to_add)
+{
+	if (buffer->index < buffer->len)
+	{
+		buffer->buf[buffer->index] = to_add;
+		buffer->index += 1;
+	}
+	if (buffer->index == buffer->len)
+	{
+		write(1, buffer->buf, buffer->len);
+		buffer->index = 0;
+	}
+}
+
 /**
  * spec_eng - Calls the correct print function and returns a string
  *
@@ -9,22 +23,33 @@
  * Return: a string
  */
 
-char *spec_eng(va_list list, spec_data_t *data)
+int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 {
+	pf_buf_t *tmp;
+	int len = 0, i, j = 0;
 	specs_t specs[] = {
 		{'c', store_char},
 		{'s', store_string},
+		{0, NULL}
 	};
-	int i;
 
 	for (i = 0; specs[i].spec; i++)
 	{
 		if (data->spec == specs[i].spec)
-			return (specs[i].func(list));
+		{
+			tmp = specs[i].func(list, data);
+			if (tmp)
+			{
+				while (j < tmp->len)
+					pf_buf_t_add_char(buffer, tmp->buf[j++]);
+				len = tmp->len;
+				pf_buf_t_delete(tmp);
+			}
+		}
 	}
-
-	return (NULL);
+	return (len);
 }
+
 
 /**
  * _printf - entry point for our main function
@@ -38,9 +63,13 @@ int _printf(const char *format, ...)
 {
 	va_list list;
 	int i = 0, len = 0;
-	char *buffer = NULL;
-	char *tmp;
 	spec_data_t *data;
+	pf_buf_t *buffer;
+	int total_len = 0;
+
+	buffer = pf_buf_t_new(BUFSIZE);
+	if (!buffer)
+		return (0);
 
 	va_start(list, format);
 
@@ -52,42 +81,36 @@ int _printf(const char *format, ...)
 	{
 		while (format[i] && format[i] != '%')
 		{
-			buffer = _charcat(buffer, format[i]);
-			i++;
+			pf_buf_t_add_char(buffer, format[i++]);
+			total_len++;
 		}
 
 		if (format[i] == '%')
 		{
 			data = parse_spec(format + i);
+
 			if (data->len == 0)
-				buffer = _strcat(buffer, "%");
+			{
+				pf_buf_t_add_char(buffer, '%');
+				total_len++;
+			}
 			else if (data->spec == '%')
 			{
-				buffer = _strcat(buffer, "%");
+				pf_buf_t_add_char(buffer, '%');
 				i++;
+				total_len++;
 			}
 			else if (data)
 			{
-				tmp = spec_eng(list, data);
-				buffer = _strcat(buffer, tmp);
+				total_len += spec_eng(list, data, buffer);
 				i += data->len;
 			}
 			free_spec_data(data);
 		}
 		i++;
 	}
-
+	pf_buf_t_print(buffer);
 	va_end(list);
-	if (_strlen(buffer) == 0)
-	{
-		_putchar('\0');
-		len = 1;
-	}
-	else
-	{
-		_puts(buffer);
-		len = _strlen(buffer);
-	}
-	free(buffer);
-	return (len);
+	pf_buf_t_delete(buffer);
+	return (total_len);
 }

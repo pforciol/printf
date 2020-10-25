@@ -23,7 +23,7 @@ int _putchar(char c)
 void _puts(char *str)
 {
 	int i = 0;
-	
+
 	while (str[i])
 		_putchar(str[i++]);
 }
@@ -224,4 +224,28 @@ char *_strdup(char *str)
 	}
 	new_str[i] = '\0';
 	return (new_str);
+}
+
+/**
+ * _strcpy - copies the string pointed to by src to the buffer pointed
+ * to by dest and returns the value pointed to by dest
+ *
+ * @dest: destination buffer
+ * @src: source buffer
+ *
+ * Return: pointer to dest
+ */
+
+char *_strcpy(char *dest, char *src)
+{
+	int i = 0;
+
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+
+	return (dest);
 }

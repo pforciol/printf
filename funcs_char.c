@@ -1,21 +1,22 @@
 #include "holberton.h"
 
 /**
- * store_char - returns a single char to buffer
+ * store_char - returns a pointer to pf_but_t
  *
  * @c: a char
  *
- * Return: a string
+ * Return: a pointer to pf_but_t
  */
 
-char *store_char(va_list c)
+pf_buf_t *store_char(va_list list, spec_data_t *data)
 {
-	char *ch = malloc(sizeof(char) * 2);
+	pf_buf_t *tmp = pf_buf_t_new(1);
+	(void)data;
 
-	ch[0] = va_arg(c, int);
-	ch[1] = '\0';
+	if (tmp)
+		tmp->buf[0] = va_arg(list, int);
 
-	return (ch);
+	return (tmp);
 }
 
 /**
@@ -26,12 +27,23 @@ char *store_char(va_list c)
  * Return: a string
  */
 
-char *store_string(va_list str)
+pf_buf_t *store_string(va_list list, spec_data_t *data)
 {
-	char *arg = va_arg(str, char*);
+	char *str = va_arg(list, char*);
+	pf_buf_t *tmp = NULL;
+	int length;
+	(void)data;
 
-	if (arg == NULL)
-		arg = "(null)";
+	if (str == NULL)
+		str = "(null)";
 
-	return (arg);
+	length = _strlen(str);
+	if (length)
+	{
+		tmp = pf_buf_t_new(length);
+		if (tmp)
+			_strcpy(tmp->buf, str);
+	}
+
+	return (tmp);
 }
