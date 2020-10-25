@@ -55,11 +55,11 @@ spec_data_t	*parse_spec(const char *format)
 	char spec, length[100], prec[100], width[100], flags[100];
 	int i = 1, j = 0, len = 0;
 
-	char specs[24] = "diufFeEgGxXosScpaAnbrR%\0";
+	char specs[24] = "diufFeEgGxXosScpaAnbrR%";
 
 	while (format[i] && format[i] != ' ')
 	{
-		j = _strnchr(specs, format[i], 25);
+		j = _strnchr(specs, format[i], 24);
 		if (j != -1)
 			break;
 		i++;
@@ -80,11 +80,13 @@ spec_data_t	*parse_spec(const char *format)
 
 		j = 0;
 		if (_strnchr((char *)format, '.', len) != -1)
+		{
 			while (i > 0 && format[i] && format[i] != '.')
 			{
 				prec[j++] = format[i--];
 			}
-		i--;
+			i--;
+		}
 		prec[j] = '\0';
 
 		j = 0;
@@ -92,7 +94,17 @@ spec_data_t	*parse_spec(const char *format)
 			width[j++] = format[i--];
 		width[j] = '\0';
 
-		j = 0;
+		if (j > 0 && width[j - 1] == '0')
+		{
+			flags[0] = '0';
+			width[j - 1] = '\0';
+			j = 1;
+		}
+		else 
+		{
+			j = 0;
+		}
+
 		while (i > 0 && format[i])
 			flags[j++] = format[i--];
 		flags[j] = '\0';
