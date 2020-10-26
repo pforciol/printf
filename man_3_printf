@@ -80,6 +80,22 @@ The
 argument is converted to signed decimal notation. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits,
 it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty.
 .TP
+.B c
+If no
+.B l
+modifier is present, the
+.I int
+argument is converted to an
+.IR unsigned char ,
+and the resulting character is written. If an
+.B l
+modifier is present, the
+.I wint_t
+(wide character) argument is converted to a multibyte sequence by a call to the
+.BR wcrtomb (3)
+function, with a conversion state starting in the initial state, and the resulting multibyte string is written.
+
+.TP
 .B %
 A '%' is written. No argument is converted. The complete conversion specification is '%%'.
 .SH NOTES

@@ -1,5 +1,15 @@
 #include "holberton.h"
 
+/**
+ * extract_format - Extracts all the optional specifier
+ * (after % and before the conversion specifier)
+ *
+ * @format: the whole format string from _printf
+ * @size: number of chars between % and conversion specifier
+ *
+ * Return: All the optional specifiers
+ */
+
 char *extract_format(const char *format, int size)
 {
 	char *str = "";
@@ -13,6 +23,15 @@ char *extract_format(const char *format, int size)
 
 	return (str);
 }
+
+/**
+ * extract_length - Extracts the length from the optional specifiers
+ *
+ * @str: the full string of specifiers
+ * @data: a struct containing all metadata (= all specifiers)
+ *
+ * Return: a string containing the length
+ */
 
 char *extract_length(char *str, spec_data_t *data)
 {
@@ -45,6 +64,15 @@ char *extract_length(char *str, spec_data_t *data)
 	return (str_result);
 }
 
+/**
+ * extract_prec - Extract the precision from the optional specifiers
+ *
+ * @str: the full string of specifiers
+ * @data: a struct containing all metadata (= all specifiers)
+ *
+ * Return: an int containing the requested precision
+ */
+
 int extract_prec(char *str, spec_data_t *data)
 {
 	int str_length = _strlen(str);
@@ -72,6 +100,16 @@ int extract_prec(char *str, spec_data_t *data)
 	return (prec);
 }
 
+/**
+ * extract_width - Extract the width from the optional specifiers
+ *
+ * @str: the full string of specifiers
+ * @data: a struct containing all metadata (= all specifiers)
+ *
+ * Return: an int containing the requested width
+ */
+
+
 int extract_width(char *str, spec_data_t *data)
 {
 	int str_length = _strlen(str);
@@ -91,6 +129,15 @@ int extract_width(char *str, spec_data_t *data)
 	}
 	return (width);
 }
+
+/**
+ * extract_flags - Extract the flags from the optional specifiers
+ *
+ * @str: the full string of specifiers
+ * @data: a struct containing all metadata (= all specifiers)
+ *
+ * Return: a string containing the requested flags
+ */
 
 char *extract_flags(char *str, spec_data_t *data)
 {

@@ -19,11 +19,13 @@
 /**
  * struct spec_data - specifiers data
  *
- * @flags: - +   0 ' #
- * @width: minimum number of characters to output
- * @prec: maximum limit on the output, depending on the type
- * @length: hh h l ll L z j t
- * @spec: % d,i u f,F e,E g,G x,X o s,S c p a,A n b r,R
+ * @spec_flags: - +   0 ' #
+ * @spec_width: minimum number of characters to output
+ * @spec_prec: maximum limit on the output, depending on the type
+ * @spec_length: hh h l ll L z j t
+ * @fmt_spec: % d,i u f,F e,E g,G x,X o s,S c p a,A n b r,R
+ * @fmt_len: length of the format specifier
+ * @status: return value of extract functions
  */
 
 typedef struct spec_data
@@ -41,7 +43,8 @@ typedef struct spec_data
  * struct pf_buf - _printf buffer
  *
  * @buf: the buffer
- * @len: the size to print of the buffer
+ * @len: the size of the string to add to main buffer
+ * @index: index of last char in main buffer
  */
 
 typedef struct pf_buf
