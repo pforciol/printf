@@ -81,7 +81,7 @@ pf_buf_t *store_rev(va_list list, spec_data_t *data)
 		if (tmp)
 			_strcpy(tmp->buf, str2);
 	}
-	
+
 	free(str2);
 
 	return (tmp);

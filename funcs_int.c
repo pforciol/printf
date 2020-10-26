@@ -29,7 +29,7 @@ pf_buf_t *store_int(va_list list, spec_data_t *data)
 		if (tmp)
 			_strcpy(tmp->buf, str);
 	}
-	
+
 	free(str);
 	return (tmp);
 }
