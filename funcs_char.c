@@ -68,7 +68,7 @@ pf_buf_t *store_rev(va_list list, spec_data_t *data)
 	if (str == NULL)
 		str = "(null)";
 
-	str = rev_string(str);
+	rev_string(str);
 
 	length = _strlen(str);
 	if (length)
@@ -95,9 +95,9 @@ pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 	char *str = va_arg(list, char*);
 	pf_buf_t *tmp = NULL;
 	int length, i, j;
-	(void)data;
 	char *src = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char *dst = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	(void)data;
 
 	if (str == NULL)
 		str = "(null)";

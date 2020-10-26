@@ -96,6 +96,8 @@ int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list);
 pf_buf_t *store_char(va_list c, spec_data_t *data);
 pf_buf_t *store_string(va_list str, spec_data_t *data);
 pf_buf_t *store_int(va_list list, spec_data_t *data);
+pf_buf_t *store_rev(va_list str, spec_data_t *data);
+pf_buf_t *store_rot13(va_list str, spec_data_t *data);
 
 /* SPEC_DATA_T */
 int spec_data_t_parse(spec_data_t *data, const char *format);

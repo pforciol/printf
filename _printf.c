@@ -19,6 +19,8 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 		{'s', store_string},
 		{'d', store_int},
 		{'i', store_int},
+		{'r', store_rev},
+		{'R', store_rot13},
 		{0, NULL}
 	};
 
