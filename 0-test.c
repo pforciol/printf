@@ -103,9 +103,9 @@ int main(void)
 	printf("----------\n");
 
 	printf("13) d format with pad + width, 5 \n");
-	ret = printf("%zzzzd", 5);
+	ret = printf("%kkkkkd", 5);
 	printf("\n> RET = %d\n", ret);
-	ret = _printf("%zzzzd", 5);
+	ret = _printf("%kkkkkd", 5);
 	printf("\n> RET = %d\n", ret);
 	printf("----------\n");
 	return(0);

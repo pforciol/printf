@@ -105,7 +105,7 @@ int _printf(const char *format, ...)
 						i += data->fmt_len;
 					}
 				}
-				else if (status == EMPTY)
+				else if (status == INVALID)
 				{
 						pf_buf_t_add_char(buffer, '%');
 						total_len++;

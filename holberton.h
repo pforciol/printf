@@ -9,8 +9,10 @@
 #define BUFSIZE 1024
 #define SPECIFIERS_SIZE 23
 #define LENGTH_SPECS_SIZE 8
+#define FLAGS_SPECS_SIZE 6
 
-#define ERROR -1
+#define ERROR -2
+#define INVALID -1
 #define EMPTY 0
 #define OK 1
 
@@ -32,6 +34,7 @@ typedef struct spec_data
 	int spec_width;
 	char *spec_flags;
 	int fmt_len;
+	int status;
 } spec_data_t;
 
 /**
@@ -76,7 +79,9 @@ int _strnchr(char *s, char c, unsigned int n);
 void rev_string(char *str);
 char *_strcpy(char *dest, char *src);
 char *_strncpy(char *dest, char *src, int size);
+char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
+int _atoi(char *s);
 
 /* PRINTF */
 int _printf(const char *format, ...);
@@ -100,6 +105,9 @@ void pf_buf_t_print(pf_buf_t *buffer);
 
 /* SPECIFIERS */
 char *extract_format(const char *format, int size);
-char *extract_length(char *str);
+char *extract_length(char *str, spec_data_t *data);
+int extract_prec(char *str, spec_data_t *data);
+int extract_width(char *str, spec_data_t *data);
+char *extract_flags(char *str, spec_data_t *data);
 
 #endif

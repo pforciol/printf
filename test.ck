@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	printf("%.3ks\n", "Titi");
+	printf("%.s\n", "Titi");
 	return (0);
 }
