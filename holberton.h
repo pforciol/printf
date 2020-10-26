@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #define BUFSIZE 1024
-#define SPECIFIERS_SIZE 23
+#define SPECIFIERS_SIZE 13
 #define LENGTH_SPECS_SIZE 8
 #define FLAGS_SPECS_SIZE 6
 
