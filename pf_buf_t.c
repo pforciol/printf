@@ -85,5 +85,6 @@ void pf_buf_t_flush(pf_buf_t *buffer)
 
 void pf_buf_t_print(pf_buf_t *buffer)
 {
-	write(1, buffer->buf, buffer->index);
+	if (buffer->index > 0)
+		write(1, buffer->buf, buffer->index);
 }
