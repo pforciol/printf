@@ -61,22 +61,28 @@ pf_buf_t *store_string(va_list list, spec_data_t *data)
 pf_buf_t *store_rev(va_list list, spec_data_t *data)
 {
 	char *str = va_arg(list, char*);
+	char *str2;
 	pf_buf_t *tmp = NULL;
 	int length;
 	(void)data;
 
 	if (str == NULL)
 		str = "(null)";
+	else
+	{
+		str2 = _strdup(str);
+		rev_string(str2);
+	}
 
-	rev_string(str);
-
-	length = _strlen(str);
+	length = _strlen(str2);
 	if (length)
 	{
 		tmp = pf_buf_t_new(length);
 		if (tmp)
-			_strcpy(tmp->buf, str);
+			_strcpy(tmp->buf, str2);
 	}
+	
+	free(str2);
 
 	return (tmp);
 }
@@ -93,6 +99,7 @@ pf_buf_t *store_rev(va_list list, spec_data_t *data)
 pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 {
 	char *str = va_arg(list, char*);
+	char *cpy;
 	pf_buf_t *tmp = NULL;
 	int length, i, j;
 	char *src = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -101,27 +108,32 @@ pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 
 	if (str == NULL)
 		str = "(null)";
-
-	for (i = 0; str[i]; i++)
+	else
 	{
-		for (j = 0; src[j]; j++)
+		cpy = _strdup(str);
+		for (i = 0; cpy[i]; i++)
 		{
-			if (str[i] == src[j])
+			for (j = 0; src[j]; j++)
 			{
-				str[i] = dst[j];
-				break;
+				if (cpy[i] == src[j])
+				{
+					cpy[i] = dst[j];
+					break;
+				}
 			}
 		}
 	}
 
-	length = _strlen(str);
+	length = _strlen(cpy);
 
 	if (length)
 	{
 		tmp = pf_buf_t_new(length);
 		if (tmp)
-			_strcpy(tmp->buf, str);
+			_strcpy(tmp->buf, cpy);
 	}
+
+	free(cpy);
 
 	return (tmp);
 }

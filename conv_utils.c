@@ -35,7 +35,7 @@ int	_atoi(char *s)
 
 char *_itoa(int i)
 {
-	char *str, *res;
+	char *str = NULL;
 	unsigned int n = i;
 	int j = 0;
 
@@ -63,8 +63,5 @@ char *_itoa(int i)
 	str[j] = '\0';
 	rev_string(str);
 
-	res = _strdup(str);
-	free(str);
-
-	return (res);
+	return (str);
 }

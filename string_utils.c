@@ -51,15 +51,15 @@ int _strnchr(char *s, char c, unsigned int n)
 
 void rev_string(char *str)
 {
-	int i = 0;
-	int j = _strlen(str) - 1, max = j / 2;
+	int i, j = 0, len = (_strlen(str) - 1);
 	char tmp;
 
-	while (j > max)
+	for (i = len; i > j; i--)
 	{
 		tmp = str[i];
-		str[i++] = str[j];
-		str[j--] = tmp;
+		str[i] = str[j];
+		str[j] = tmp;
+		j++;
 	}
 }
 
