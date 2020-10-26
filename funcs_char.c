@@ -1,11 +1,12 @@
 #include "holberton.h"
 
 /**
- * store_char - returns a pointer to pf_but_t
+ * store_char - returns a temp buffer containing the string
  *
- * @c: a char
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
  *
- * Return: a pointer to pf_but_t
+ * Return: a pointer to a temp pf_buf_t struct
  */
 
 pf_buf_t *store_char(va_list list, spec_data_t *data)
@@ -15,16 +16,16 @@ pf_buf_t *store_char(va_list list, spec_data_t *data)
 
 	if (tmp)
 		tmp->buf[0] = va_arg(list, int);
-
 	return (tmp);
 }
 
 /**
- * store_string- returns a string to buffer
+ * store_string - returns a temp buffer containing the string
  *
- * @s: a string
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
  *
- * Return: a string
+ * Return: a pointer to a temp pf_buf_t struct
  */
 
 pf_buf_t *store_string(va_list list, spec_data_t *data)
