@@ -1,24 +1,11 @@
 #include "holberton.h"
 
-void add_to_buf(pf_buf_t *buffer, char to_add)
-{
-	if (buffer->index < buffer->len)
-	{
-		buffer->buf[buffer->index] = to_add;
-		buffer->index += 1;
-	}
-	if (buffer->index == buffer->len)
-	{
-		write(1, buffer->buf, buffer->len);
-		buffer->index = 0;
-	}
-}
-
 /**
  * spec_eng - Calls the correct print function and returns a string
  *
  * @list: the va_list object
  * @data: the parsed complete specifier
+ * @buffer: the main buffer
  *
  * Return: a string
  */
@@ -50,6 +37,55 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 	return (len);
 }
 
+/**
+ * format_parsing - the function that do the parsing on the format and
+ * executes the spec_eng function
+ *
+ * @i: the format index
+ * @format: the format string
+ * @buf: the main buffer
+ * @list: the list of parameters
+ *
+ * Return: the size of the returned element
+ */
+
+int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list)
+{
+	spec_data_t *data = NULL;
+	int status = OK;
+	int ret_value = -1;
+
+	data = spec_data_t_new();
+	if (data)
+	{
+		status = spec_data_t_parse(data, format + (*i));
+		if (status == OK)
+		{
+			if (data->fmt_spec == '%')
+			{
+				pf_buf_t_add_char(buf, '%');
+				(*i)++;
+				ret_value = 1;
+			}
+			else
+			{
+				*i += data->fmt_len;
+				ret_value = spec_eng(list, data, buf);
+			}
+		}
+		else if (status == INVALID)
+		{
+			pf_buf_t_add_char(buf, '%');
+			ret_value = 1;
+		}
+		else
+		{
+			ret_value = -1;
+		}
+		spec_data_t_delete(data);
+	}
+	return (ret_value);
+}
 
 /**
  * _printf - entry point for our main function
@@ -96,40 +132,3 @@ int _printf(const char *format, ...)
 	return (total_len);
 }
 
-int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list)
-{
-	spec_data_t *data = NULL;
-	int status = OK;
-	int ret_value = -1;
-
-	data = spec_data_t_new();
-	if (data)
-	{
-		status = spec_data_t_parse(data, format + (*i));
-		if (status == OK)
-		{
-			if (data->fmt_spec == '%')
-			{
-				pf_buf_t_add_char(buf, '%');
-				(*i)++;
-				ret_value = 1;
-			}
-			else
-			{
-				*i += data->fmt_len;
-				ret_value = spec_eng(list, data, buf);
-			}
-		}
-		else if (status == INVALID)
-		{
-			pf_buf_t_add_char(buf, '%');
-			ret_value = 1;
-		}
-		else
-		{
-			ret_value = -1;
-		}
-		spec_data_t_delete(data);
-	}
-	return (ret_value);
-}
