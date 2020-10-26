@@ -82,6 +82,7 @@ char *_strncpy(char *dest, char *src, int size);
 char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
+char *_itoa(int i);
 
 /* PRINTF */
 int _printf(const char *format, ...);
@@ -91,6 +92,7 @@ int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list);
 
 pf_buf_t *store_char(va_list c, spec_data_t *data);
 pf_buf_t *store_string(va_list str, spec_data_t *data);
+pf_buf_t *store_int(va_list list, spec_data_t *data);
 
 /* SPEC_DATA_T */
 int spec_data_t_parse(spec_data_t *data, const char *format);

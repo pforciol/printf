@@ -17,6 +17,8 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 	specs_t specs[] = {
 		{'c', store_char},
 		{'s', store_string},
+		{'d', store_int},
+		{'i', store_int},
 		{0, NULL}
 	};
 

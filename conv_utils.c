@@ -63,7 +63,7 @@ char *_itoa(int i)
 	str[j] = '\0';
 	rev_string(str);
 
-	res = strdup(str);
+	res = _strdup(str);
 	free(str);
 
 	return (res);
