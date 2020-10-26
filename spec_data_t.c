@@ -1,5 +1,13 @@
 #include "holberton.h"
 
+/**
+ * spec_data_t_delete - frees the structure spec_data_t
+ *
+ * @data: the structure to free
+ *
+ * Return: NULL if needed
+ */
+
 void *spec_data_t_delete(spec_data_t *data)
 {
 	if (data)
@@ -12,6 +20,12 @@ void *spec_data_t_delete(spec_data_t *data)
 	}
 	return (NULL);
 }
+
+/**
+ * spec_data_t_new - creates and allocates a new spec_data_t structure
+ *
+ * Return: a pointer to the newly allocated structure
+ */
 
 spec_data_t *spec_data_t_new(void)
 {
@@ -32,6 +46,15 @@ spec_data_t *spec_data_t_new(void)
 
 	return (new);
 }
+
+/**
+ * spec_data_t_parse - parses and fill the structure
+ *
+ * @data: the structure
+ * @format: the format string
+ *
+ * Return: the output status
+ */
 
 int spec_data_t_parse(spec_data_t *data, const char *format)
 {
@@ -77,6 +100,14 @@ int spec_data_t_parse(spec_data_t *data, const char *format)
 	return (data->status);
 }
 
+/**
+ * is_in_format_specifiers - checks if the current character is in specifiers
+ *
+ * @c: the character to check
+ *
+ * Return: the index if found, else -1
+ */
+
 int is_in_format_specifiers(char c)
 {
 	char specifiers[SPECIFIERS_SIZE] = "diufFeEgGxXosScpaAnbrR%";
@@ -90,6 +121,15 @@ int is_in_format_specifiers(char c)
 	}
 	return (-1);
 }
+
+/**
+ * spec_data_t_leave - frees and return on ERROR or INVALID
+ *
+ * @str: the string to free
+ * @status: the current status
+ *
+ * Return: the status value
+ */
 
 int spec_data_t_leave(char *str, int status)
 {
