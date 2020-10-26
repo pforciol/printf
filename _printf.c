@@ -127,8 +127,7 @@ int _printf(const char *format, ...)
 			tmp_len = format_parsing(&i, format, buffer, list);
 			if (tmp_len == -1)
 				return (-1);
-			else
-				total_len += tmp_len;
+			total_len += tmp_len;
 			tmp_len = 0;
 		}
 		i++;
