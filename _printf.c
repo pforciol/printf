@@ -21,6 +21,8 @@ int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer)
 		{'i', store_int},
 		{'r', store_rev},
 		{'R', store_rot13},
+		{'b', store_binary},
+		{'S', store_strnop},
 		{0, NULL}
 	};
 
