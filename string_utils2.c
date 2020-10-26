@@ -1,20 +1,6 @@
 #include "holberton.h"
 
 /**
- * _putchar - writes the character c to stdout
- *
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
  * _puts - writes the string str to stdout
  *
  * @str: The string to print
@@ -66,32 +52,68 @@ char *_strcat(char *s1, char *s2)
 }
 
 /**
- * _charcat - concatenates a char to a string
+ * _strncpy - copies the string pointed to by src to the buffer pointed
+ * to by dest and returns the value pointed to by dest
  *
- * @str: the first string
- * @c: the char
+ * @dest: destination buffer
+ * @src: source buffer
+ * @size: maximum size to copy
  *
- * Return: a pointer to the new string, or NULL on failure
+ * Return: pointer to dest
  */
 
-char *_charcat(char *str, char c)
+char *_strncpy(char *dest, char *src, int size)
 {
-	char *cat;
 	int i = 0;
 
-	cat = malloc(sizeof(char) * (_strlen(str) + 2));
-	if (!cat)
-		return (NULL);
-	if (str != NULL)
-		while (str[i])
-		{
-			cat[i] = str[i];
-			i++;
-		}
-	if (c)
-		cat[i] = c;
-	i++;
-	cat[i] = '\0';
-	free(str);
-	return (cat);
+	while (src[i] && i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/**
+ * _strcmp - compares 2 strings
+ *
+ * @s1: first string
+ * @s2: second string
+ *
+ * Return: diff between first two different chars
+ */
+
+
+int _strcmp(char *s1, char *s2)
+{
+	int i = 0;
+
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+/**
+ * _strchr - locates a character in a string
+ *
+ * @s: the string to look inside
+ * @c: the character to find
+ *
+ * Return: a pointer to the first occurence of c in s, or NULL if not found
+ */
+
+char	*_strchr(char *s, char c)
+{
+	unsigned int i = 0;
+
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (s + i);
+		i++;
+	}
+	if (s[i] == c)
+		return (s + i);
+	return (NULL);
 }
