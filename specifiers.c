@@ -37,7 +37,7 @@ char *extract_length(char *str, spec_data_t *data)
 					_strncpy(str_result, length_specifiers[j], 2);
 				str[i] = '\0';
 				data->status = (str_result) ? OK : ERROR;
-				break ;
+				return (str_result);
 			}
 		}
 		data->status = INVALID;
@@ -53,7 +53,7 @@ int extract_prec(char *str, spec_data_t *data)
 	data->status = EMPTY;
 
 	i = _strnchr(str, '.', str_length);
-	if (str_length > 0 && i != -1 )
+	if (str_length > 0 && i != -1)
 	{
 		j = i + 1;
 		while (str[j] && _isdigit(str[j]))
@@ -97,7 +97,7 @@ char *extract_flags(char *str, spec_data_t *data)
 	int str_length = _strlen(str), i = 0;
 	char *str_result = "";
 	char flags_specifiers[FLAGS_SPECS_SIZE] = "-+ 0'#";
-	
+
 	data->status = EMPTY;
 
 	if (str_length > 0)
@@ -105,7 +105,7 @@ char *extract_flags(char *str, spec_data_t *data)
 		while (str[i])
 		{
 			if (_strchr(flags_specifiers, str[i]) == NULL)
-				break ;
+				break;
 			i++;
 		}
 		if (i == str_length)

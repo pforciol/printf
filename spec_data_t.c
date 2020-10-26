@@ -39,15 +39,13 @@ int spec_data_t_parse(spec_data_t *data, const char *format)
 	int i = 1, j = 0;
 
 	data->status = INVALID;
-
 	while (format[i])
 	{
 		j = is_in_format_specifiers(format[i]);
 		if (j != -1)
-			break ;
+			break;
 		i++;
 	}
-
 	if (j != -1)
 	{
 		data->status = OK;
@@ -60,14 +58,14 @@ int spec_data_t_parse(spec_data_t *data, const char *format)
 			{
 				data->spec_length = extract_length(str, data);
 				if (data->status == INVALID || data->status == ERROR)
-					return (data->status);
+					return (spec_data_t_leave(str, data->status));
 				data->spec_prec = extract_prec(str, data);
 				if (data->status == INVALID || data->status == ERROR)
-					return (data->status);
+					return (spec_data_t_leave(str, data->status));
 				data->spec_width = extract_width(str, data);
 				data->spec_flags = extract_flags(str, data);
 				if (data->status == INVALID || data->status == ERROR)
-					return (data->status);
+					return (spec_data_t_leave(str, data->status));
 				data->status = OK;
 			}
 			if (_strcmp(str, "") != 0)
@@ -91,4 +89,11 @@ int is_in_format_specifiers(char c)
 		i++;
 	}
 	return (-1);
+}
+
+int spec_data_t_leave(char *str, int status)
+{
+	if (str && _strcmp(str, "") != 0)
+		free(str);
+	return (status);
 }

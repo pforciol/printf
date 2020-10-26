@@ -87,6 +87,7 @@ int _atoi(char *s);
 int _printf(const char *format, ...);
 int spec_eng(va_list list, spec_data_t *data, pf_buf_t *buffer);
 int is_in_format_specifiers(char c);
+int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list);
 
 pf_buf_t *store_char(va_list c, spec_data_t *data);
 pf_buf_t *store_string(va_list str, spec_data_t *data);
@@ -95,6 +96,7 @@ pf_buf_t *store_string(va_list str, spec_data_t *data);
 int spec_data_t_parse(spec_data_t *data, const char *format);
 spec_data_t *spec_data_t_new(void);
 void *spec_data_t_delete(spec_data_t *data);
+int spec_data_t_leave(char *str, int status);
 
 /* PF_BUF_T */
 pf_buf_t *pf_buf_t_new(size_t size);
