@@ -71,7 +71,7 @@ int format_parsing(int *i, const char *format, pf_buf_t *buf, va_list list)
 			}
 			else
 			{
-				*i += data->fmt_len;
+				(*i) += data->fmt_len;
 				ret_value = spec_eng(list, data, buf);
 			}
 		}
@@ -102,7 +102,7 @@ int _printf(const char *format, ...)
 	va_list list;
 	int i = 0, len = 0;
 	pf_buf_t *buffer;
-	int total_len = 0;
+	int total_len = 0, tmp_len = 0;
 
 	buffer = pf_buf_t_new(BUFSIZE);
 	if (!buffer)
@@ -122,9 +122,14 @@ int _printf(const char *format, ...)
 			total_len++;
 		}
 
-		if (format[i] == '%')
+		if (format[i] == '%' && len > 1)
 		{
-			total_len += format_parsing(&i, format, buffer, list);
+			tmp_len = format_parsing(&i, format, buffer, list);
+			if (tmp_len == -1)
+				return (-1);
+			else
+				total_len += tmp_len;
+			tmp_len = 0;
 		}
 		i++;
 	}
@@ -133,4 +138,3 @@ int _printf(const char *format, ...)
 	pf_buf_t_delete(buffer);
 	return (total_len);
 }
-
