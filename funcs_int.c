@@ -33,3 +33,12 @@ pf_buf_t *store_int(va_list list, spec_data_t *data)
 	free(str);
 	return (tmp);
 }
+
+pf_buf_t *store_binary(va_list list, spec_data_t *data)
+{
+	pf_buf_t *tmp = NULL;
+	(void)list;
+	(void)data;
+
+	return (tmp);
+}

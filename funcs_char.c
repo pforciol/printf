@@ -137,3 +137,12 @@ pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 
 	return (tmp);
 }
+
+pf_buf_t *store_strnop(va_list list, spec_data_t *data)
+{
+	pf_buf_t *tmp = NULL;
+	(void)list;
+	(void)data;
+
+	return (tmp);
+}
