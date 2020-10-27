@@ -86,7 +86,11 @@ char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
 char *_itoa(int i);
+char *_uitoa(unsigned int i);
 char *_chartohex(int ch);
+char *_dectohex(unsigned int uint, int upper);
+char *_dectooct(unsigned int uint);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* PRINTF */
 int _printf(const char *format, ...);
@@ -101,6 +105,11 @@ pf_buf_t *store_rev(va_list str, spec_data_t *data);
 pf_buf_t *store_rot13(va_list str, spec_data_t *data);
 pf_buf_t *store_binary(va_list list, spec_data_t *data);
 pf_buf_t *store_strnop(va_list list, spec_data_t *data);
+pf_buf_t *store_uint(va_list list, spec_data_t *data);
+pf_buf_t *store_uoct(va_list list, spec_data_t *data);
+pf_buf_t *store_lowuhex(va_list list, spec_data_t *data);
+pf_buf_t *store_upuhex(va_list list, spec_data_t *data);
+
 
 /* SPEC_DATA_T */
 int spec_data_t_parse(spec_data_t *data, const char *format);

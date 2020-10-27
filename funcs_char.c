@@ -165,7 +165,7 @@ pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 			if ((str[i] > 0 && str[i] < 32) || str[i] == 127)
 			{
 				hex = _chartohex(str[i++]);
-				cpy = realloc(cpy, sizeof(cpy) + (sizeof(char) * 4));
+				cpy = _realloc(cpy, sizeof(cpy), sizeof(cpy) + (sizeof(char) * 4));
 				if (!cpy)
 					free(cpy);
 				cpy[j++] = '\\';

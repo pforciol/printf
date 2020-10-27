@@ -34,6 +34,15 @@ pf_buf_t *store_int(va_list list, spec_data_t *data)
 	return (tmp);
 }
 
+/**
+ * store_binary - returns a int converted in binary in string form
+ *
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
+ *
+ * Return: a pointer to a temp pf_buf_t struct
+ */
+
 pf_buf_t *store_binary(va_list list, spec_data_t *data)
 {
 	unsigned int nbr = va_arg(list, unsigned int);
@@ -63,5 +72,74 @@ pf_buf_t *store_binary(va_list list, spec_data_t *data)
 		}
 	}
 	free(binary);
+	return (tmp);
+}
+
+/**
+ * store_uint - returns a temp buffer containing an unsigned int
+ *
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
+ *
+ * Return: a pointer to a temp pf_buf_t struct
+ */
+
+pf_buf_t *store_uint(va_list list, spec_data_t *data)
+{
+	int num = va_arg(list, int);
+	pf_buf_t *tmp = NULL;
+	int length;
+	char *str;
+	(void)data;
+
+	str = _uitoa(num);
+
+	if (str == NULL)
+		str = "(null)";
+
+	length = _strlen(str);
+	if (length)
+	{
+		tmp = pf_buf_t_new(length);
+		if (tmp)
+			_strcpy(tmp->buf, str);
+	}
+
+	free(str);
+	return (tmp);
+}
+
+
+/**
+ * store_uoct - returns a buffer containing  an unsigned int in octal
+ *
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
+ *
+ * Return: a pointer to a temp pf_buf_t struct
+ */
+
+pf_buf_t *store_uoct(va_list list, spec_data_t *data)
+{
+	int num = va_arg(list, int);
+	pf_buf_t *tmp = NULL;
+	int length;
+	char *str;
+	(void)data;
+
+	str = _dectooct(num);
+
+	if (str == NULL)
+		str = "(null)";
+
+	length = _strlen(str);
+	if (length)
+	{
+		tmp = pf_buf_t_new(length);
+		if (tmp)
+			_strcpy(tmp->buf, str);
+	}
+
+	free(str);
 	return (tmp);
 }

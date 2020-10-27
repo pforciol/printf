@@ -101,3 +101,74 @@ char *_chartohex(int ch)
 
 	return (ret);
 }
+
+/**
+ * _dectohex - converts unsigned int to hex and stores in string
+ *
+ * @uint: the unsigned int to convert
+ *
+ * Return: a string containing the number in hexadecimal
+ */
+
+char *_dectohex(unsigned int uint, int upper)
+{
+	unsigned long quo, rem;
+	int j = 0;
+	char res[10] = "";
+	char *ret;
+
+	quo = uint;
+
+	while (quo != 0)
+	{
+		rem = quo % 16;
+		if (rem < 10)
+			res[j++] = 48 + rem;
+		else
+		{
+			if (upper)
+				res[j++] = 55 + rem;
+			else
+				res[j++] = 87 + rem;
+		}
+		quo /= 16;
+	}
+	res[j] = '\0';
+	rev_string(res);
+
+	ret = _strdup(res);
+
+	return (ret);
+}
+
+/**
+ * _dectooct - converts unsigned int to octal and stores in string
+ *
+ * @uint: the unsigned int to convert
+ *
+ * Return: a string containing the number in octal
+ */
+
+char *_dectooct(unsigned int uint)
+{
+	unsigned long quo, rem;
+	int j = 0;
+	char res[10] = "";
+	char *ret;
+
+	quo = uint;
+
+	while (quo != 0)
+	{
+		rem = quo % 8;
+		res[j++] = 48 + rem;
+		quo /= 8;
+	}
+	res[j] = '\0';
+	rev_string(res);
+
+	ret = _strdup(res);
+
+	return (ret);
+}
+
