@@ -98,6 +98,6 @@ char *_chartohex(int ch)
 	rev_string(res);
 
 	ret = _strdup(res);
-	
+
 	return (ret);
 }

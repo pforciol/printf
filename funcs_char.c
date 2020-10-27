@@ -179,7 +179,6 @@ pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 		cpy[j] = '\0';
 		}
 	}
-
 	length = _strlen(cpy);
 	if (length)
 	{
@@ -188,6 +187,6 @@ pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 			_strcpy(tmp->buf, cpy);
 	}
 	free(cpy);
-	
+
 	return (tmp);
 }
