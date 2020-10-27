@@ -8,13 +8,13 @@ The format string is a character string, composed of zero or more directives: or
 
 ## Prototype
 
-```
+```c
 _printf(const char *format, ...);
 ```
 
 ## Examples
 
-```
+```c
 _printf("This is a string"); // prints "This is a string"
 
 char ch = 'a';
