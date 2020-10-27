@@ -44,4 +44,3 @@ char *_charcat(char *str, char c)
 	free(str);
 	return (cat);
 }
-

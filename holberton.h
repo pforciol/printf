@@ -86,6 +86,7 @@ char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
 char *_itoa(int i);
+char *_chartohex(int ch);
 
 /* PRINTF */
 int _printf(const char *format, ...);

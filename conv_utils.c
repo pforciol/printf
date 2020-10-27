@@ -65,3 +65,39 @@ char *_itoa(int i)
 
 	return (str);
 }
+
+/**
+ * _chartohex - converts ascii value to hex and stores in string
+ *
+ * @ch: the ascii value to convert
+ *
+ * Return: a string containing the number in hexadecimal
+ */
+
+char *_chartohex(int ch)
+{
+	unsigned long quo, rem;
+	int j = 0;
+	char res[2] = "00";
+	char *ret;
+
+	quo = ch;
+
+	while (quo != 0)
+	{
+		rem = quo % 16;
+		if (rem < 10)
+			res[j++] = 48 + rem;
+		else
+			res[j++] = 55 + rem;
+		quo /= 16;
+	}
+	if (!res[1])
+		res[1] = '0';
+	res[2] = '\0';
+	rev_string(res);
+
+	ret = _strdup(res);
+	
+	return (ret);
+}

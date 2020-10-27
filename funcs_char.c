@@ -61,28 +61,26 @@ pf_buf_t *store_string(va_list list, spec_data_t *data)
 pf_buf_t *store_rev(va_list list, spec_data_t *data)
 {
 	char *str = va_arg(list, char*);
-	char *str2;
+	char *cpy;
 	pf_buf_t *tmp = NULL;
 	int length;
 	(void)data;
 
-	if (str == NULL)
-		str = "(null)";
+	cpy = _strdup(str);
+	if (cpy == NULL)
+		cpy = "(null)";
 	else
-	{
-		str2 = _strdup(str);
-		rev_string(str2);
-	}
+		rev_string(cpy);
 
-	length = _strlen(str2);
+	length = _strlen(cpy);
 	if (length)
 	{
 		tmp = pf_buf_t_new(length);
 		if (tmp)
-			_strcpy(tmp->buf, str2);
+			_strcpy(tmp->buf, cpy);
 	}
 
-	free(str2);
+	free(cpy);
 
 	return (tmp);
 }
@@ -106,11 +104,12 @@ pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 	char *dst = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 	(void)data;
 
-	if (str == NULL)
-		str = "(null)";
+	cpy = _strdup(str);
+
+	if (cpy == NULL)
+		cpy = "(null)";
 	else
 	{
-		cpy = _strdup(str);
 		for (i = 0; cpy[i]; i++)
 		{
 			for (j = 0; src[j]; j++)
@@ -138,11 +137,57 @@ pf_buf_t *store_rot13(va_list list, spec_data_t *data)
 	return (tmp);
 }
 
+/**
+ * store_strnop - returns a temp buffer containing a string with
+ * all non printable chars as \x<ASCII code>
+ *
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
+ *
+ * Return: a pointer to a temp pf_buf_t struct
+ */
+
 pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 {
+	char *str = va_arg(list, char*);
+	char *cpy, *hex;
 	pf_buf_t *tmp = NULL;
-	(void)list;
+	int length = 0, i = 0, j = 0;
 	(void)data;
 
+	cpy = malloc(sizeof(char) * (_strlen(str) + 1));
+	if (str == NULL)
+		str = "(null)";
+	else
+	{
+		while (str[i])
+		{
+			if ((str[i] > 0 && str[i] < 32) || str[i] == 127)
+			{
+				hex = _chartohex(str[i++]);
+				cpy = realloc(cpy, sizeof(cpy) + (sizeof(char) * 4));
+				if (!cpy)
+					free(cpy);
+				cpy[j++] = '\\';
+				cpy[j++] = 'x';
+				cpy[j++] = hex[0];
+				cpy[j++] = hex[1];
+				free(hex);
+			}
+			else
+				cpy[j++] = str[i++];
+		cpy[j] = '\0';
+		}
+	}
+
+	length = _strlen(cpy);
+	if (length)
+	{
+		tmp = pf_buf_t_new(length);
+		if (tmp)
+			_strcpy(tmp->buf, cpy);
+	}
+	free(cpy);
+	
 	return (tmp);
 }
