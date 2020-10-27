@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #define BUFSIZE 1024
-#define SPECIFIERS_SIZE 13
+#define SPECIFIERS_SIZE 14
 #define LENGTH_SPECS_SIZE 8
 #define FLAGS_SPECS_SIZE 6
 
@@ -91,6 +91,7 @@ char *_chartohex(int ch);
 char *_dectohex(unsigned int uint, int upper);
 char *_dectooct(unsigned int uint);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *_ptrtohex(unsigned long ptr);
 
 /* PRINTF */
 int _printf(const char *format, ...);
@@ -109,7 +110,7 @@ pf_buf_t *store_uint(va_list list, spec_data_t *data);
 pf_buf_t *store_uoct(va_list list, spec_data_t *data);
 pf_buf_t *store_lowuhex(va_list list, spec_data_t *data);
 pf_buf_t *store_upuhex(va_list list, spec_data_t *data);
-
+pf_buf_t *store_ptr(va_list list, spec_data_t *data);
 
 /* SPEC_DATA_T */
 int spec_data_t_parse(spec_data_t *data, const char *format);

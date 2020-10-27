@@ -67,3 +67,38 @@ pf_buf_t *store_upuhex(va_list list, spec_data_t *data)
 	free(str);
 	return (tmp);
 }
+
+
+/**
+ * store_ptr - returns a string w/ a pointer address
+ *
+ * @list: the va_list containing the element to print
+ * @data: the struct containing the specifier metadata
+ *
+ * Return: a pointer to a temp pf_buf_t struct
+ */
+
+pf_buf_t *store_ptr(va_list list, spec_data_t *data)
+{
+	int num = va_arg(list, int);
+	pf_buf_t *tmp = NULL;
+	int length;
+	char *str;
+	(void)data;
+
+	str = _ptrtohex(num);
+	
+	if (str == NULL)
+		str = "(null)";
+
+	length = _strlen(str);
+	if (length)
+	{
+		tmp = pf_buf_t_new(length);
+		if (tmp)
+			_strcpy(tmp->buf, str);
+	}
+
+	free(str);
+	return (tmp);
+}

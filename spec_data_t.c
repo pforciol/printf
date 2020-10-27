@@ -110,7 +110,7 @@ int spec_data_t_parse(spec_data_t *data, const char *format)
 
 int is_in_format_specifiers(char c)
 {
-	char specifiers[SPECIFIERS_SIZE] = "diuxXosScbrR%";
+	char specifiers[SPECIFIERS_SIZE] = "diuxXosScpbrR%";
 	int i = 0;
 
 	while (i < SPECIFIERS_SIZE)
