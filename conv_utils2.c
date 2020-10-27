@@ -28,7 +28,7 @@ char *_uitoa(unsigned int i)
 	}
 	str[j++] = (n % 10) + '0';
 	str[j] = '\0';
-	
+
 	rev_string(str);
 
 	return (str);

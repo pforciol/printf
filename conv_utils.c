@@ -106,6 +106,7 @@ char *_chartohex(int ch)
  * _dectohex - converts unsigned int to hex and stores in string
  *
  * @uint: the unsigned int to convert
+ * @upper: case flag (returns uppercase hex if 1, lowercase hex if 0)
  *
  * Return: a string containing the number in hexadecimal
  */
@@ -118,7 +119,6 @@ char *_dectohex(unsigned int uint, int upper)
 	char *ret;
 
 	quo = uint;
-
 	while (quo != 0)
 	{
 		rem = quo % 16;
@@ -133,7 +133,13 @@ char *_dectohex(unsigned int uint, int upper)
 		}
 		quo /= 16;
 	}
-	res[j] = '\0';
+	if (uint == 0)
+	{
+		res[0] = '0';
+		res[1] = '\0';
+	}
+	else
+		res[j] = '\0';
 	rev_string(res);
 
 	ret = _strdup(res);
@@ -164,7 +170,13 @@ char *_dectooct(unsigned int uint)
 		res[j++] = 48 + rem;
 		quo /= 8;
 	}
-	res[j] = '\0';
+	if (uint == 0)
+	{
+		res[0] = '0';
+		res[1] = '\0';
+	}
+	else
+		res[j] = '\0';
 	rev_string(res);
 
 	ret = _strdup(res);

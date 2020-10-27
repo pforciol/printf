@@ -54,7 +54,7 @@ pf_buf_t *store_binary(va_list list, spec_data_t *data)
 
 	if (binary)
 	{
-		for (i = 1 << 31; i > 0; i = i / 2) 
+		for (i = 1 << 31; i > 0; i = i / 2)
 		{
 			binary[j] = (nbr & i) ? '1' : '0';
 			j++;
