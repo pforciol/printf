@@ -80,16 +80,17 @@ pf_buf_t *store_upuhex(va_list list, spec_data_t *data)
 
 pf_buf_t *store_ptr(va_list list, spec_data_t *data)
 {
-	int num = va_arg(list, int);
+	void *ptr = va_arg(list, void*);
 	pf_buf_t *tmp = NULL;
 	int length;
 	char *str;
 	(void)data;
 
-	str = _ptrtohex(num);
-	
+
 	if (str == NULL)
 		str = "(null)";
+	else
+		str = _ptrtohex(ptr);
 
 	length = _strlen(str);
 	if (length)

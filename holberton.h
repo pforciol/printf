@@ -91,7 +91,7 @@ char *_chartohex(int ch);
 char *_dectohex(unsigned int uint, int upper);
 char *_dectooct(unsigned int uint);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char *_ptrtohex(unsigned long ptr);
+char *_ptrtohex(void *ptr);
 
 /* PRINTF */
 int _printf(const char *format, ...);

@@ -43,14 +43,14 @@ char *_uitoa(unsigned int i)
  * Return: a string containing the number in hexadecimal
  */
 
-char *_ptrtohex(unsigned long ptr)
+char *_ptrtohex(void *ptr)
 {
 	unsigned long quo, rem;
 	int j = 0;
-	char res[10] = "";
+	char res[10] = "(nil)";
 	char *ret;
-
-	quo = ptr;
+	
+	quo = (unsigned long)ptr;
 	while (quo != 0)
 	{
 		rem = quo % 16;
@@ -62,18 +62,15 @@ char *_ptrtohex(unsigned long ptr)
 		}
 		quo /= 16;
 	}
-
-	if (ptr == 0)
+	
+	if (ptr != NULL)
 	{
-		res[0] = '0';
-		res[1] = '\0';
-	}
-	else
 		res[j++] = 'x';
 		res[j++] = '0';
 		res[j++] = '\0';
-	rev_string(res);
-
+		rev_string(res);
+	}
+		
 	ret = _strdup(res);
 
 	return (ret);
