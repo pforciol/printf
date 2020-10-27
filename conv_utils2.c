@@ -37,8 +37,7 @@ char *_uitoa(unsigned int i)
 /**
  * _ptrtohex - converts pointer address to hex and stores in string
  *
- * @uint: the unsigned int to convert
- * @upper: case flag (returns uppercase hex if 1, lowercase hex if 0)
+ * @ptr: the pointer to convert
  *
  * Return: a string containing the number in hexadecimal
  */
@@ -49,7 +48,7 @@ char *_ptrtohex(void *ptr)
 	int j = 0;
 	char res[10] = "(nil)";
 	char *ret;
-	
+
 	quo = (unsigned long)ptr;
 	while (quo != 0)
 	{
@@ -62,7 +61,7 @@ char *_ptrtohex(void *ptr)
 		}
 		quo /= 16;
 	}
-	
+
 	if (ptr != NULL)
 	{
 		res[j++] = 'x';
@@ -70,7 +69,7 @@ char *_ptrtohex(void *ptr)
 		res[j++] = '\0';
 		rev_string(res);
 	}
-		
+
 	ret = _strdup(res);
 
 	return (ret);
