@@ -3,12 +3,19 @@
 _printf
 - formatted output conversion (clone of libc's printf for Holberton School)
 .SH SYNOPSIS
-.B #include "holberton.h"
+.B #include \(dqholberton.h\(dq
+.br
+
+.br
 .BI "int _printf(const char *" format ", ...);"
 .SH DESCRIPTION
-The function _printf() produces output according to a
+The function
+.B _printf()
+produces output according to a
 .I format
-as described below. _printf() write output to
+as described below.
+.B_printf()
+write output to
 .IR stdout ,
 the standard output stream.
 .SS Return value
@@ -42,7 +49,7 @@ where each '*' and each conversion specifier asks for the next argument (and it 
 .SS The flag characters
 The character % is followed by zero or more of the following flags:
 .TP
-.B INSERT FLAGS HERE
+.B Our function does not yet support flags
 .SS The field width
 An optional decimal digit string (with nonzero first digit) specifying a minimum field width. If the converted value has fewer characters
 than the field width, it will be padded with spaces on the left.
@@ -59,26 +66,9 @@ or
 .B X
 conversion.
 .TP
-.B hh
-A following integer conversion corresponds to a
-.I signed char
-or
-.I unsigned char
-argument, or a following
-.B n
-conversion corresponds to a pointer to a
-.I signed char
-argument.
-.TP
-.B ADD OTHER MODIFIERS HERE
+.B Our function does not yet support length modifiers
 .SS The conversion specifier
 A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are:
-.TP
-.BR d ", " i
-The
-.I int
-argument is converted to signed decimal notation. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits,
-it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty.
 .TP
 .B c
 If no
@@ -86,15 +76,22 @@ If no
 modifier is present, the
 .I int
 argument is converted to an
-.IR unsigned char ,
-and the resulting character is written. If an
-.B l
-modifier is present, the
-.I wint_t
-(wide character) argument is converted to a multibyte sequence by a call to the
-.BR wcrtomb (3)
-function, with a conversion state starting in the initial state, and the resulting multibyte string is written.
-
+.I unsigned
+.I char
+, and the resulting character is written.
+.TP
+.BR s
+If no l modifier is present: The 
+.I const
+.I char
+.I *
+is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating null byte ('\0')
+.TP
+.BR d ", " i
+The
+.I int
+argument is converted to signed decimal notation. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits,
+it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty.
 .TP
 .B %
 A '%' is written. No argument is converted. The complete conversion specification is '%%'.
