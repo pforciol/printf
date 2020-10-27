@@ -157,7 +157,7 @@ pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 
 	cpy = malloc(sizeof(char) * (_strlen(str) + 1));
 	if (str == NULL)
-		str = "(null)";
+		cpy = "(null)";
 	else
 	{
 		while (str[i])
@@ -176,8 +176,8 @@ pf_buf_t *store_strnop(va_list list, spec_data_t *data)
 			}
 			else
 				cpy[j++] = str[i++];
-		cpy[j] = '\0';
 		}
+		cpy[j] = '\0';
 	}
 	length = _strlen(cpy);
 	if (length)
