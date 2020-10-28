@@ -14,8 +14,8 @@ The function
 produces output according to a
 .I format
 as described below.
-.B_printf()
-write output to
+.B _printf()
+writes output to
 .IR stdout ,
 the standard output stream.
 .SS Return value
@@ -44,8 +44,10 @@ and an optional
 .I length
 .IR modifier .
 .br
+
+.br
 The arguments must correspond properly (after type promotion) with the conversion specifiers. By default, the arguments are used in the order given,
-where each '*' and each conversion specifier asks for the next argument (and it is an error if insufficiently many arguments are given).
+where each conversion specifier asks for the next argument (and it is an error if insufficiently many arguments are given).
 .SS The flag characters
 The character % is followed by zero or more of the following flags:
 .TP
@@ -53,8 +55,12 @@ The character % is followed by zero or more of the following flags:
 .SS The field width
 An optional decimal digit string (with nonzero first digit) specifying a minimum field width. If the converted value has fewer characters
 than the field width, it will be padded with spaces on the left.
+.TP
+.B Our function does not yet handle field width
 .SS The precision
 An optional precision, in the form of a period ('.') followed by an optional decimal digit string.
+.TP
+.B Our function does not yet handle precision
 .SS The length modifier
 Here, "integer conversion" stands for
 .BR d ,
@@ -90,13 +96,37 @@ is expected to be a pointer to an array of character type (pointer to a string).
 .BR d ", " i
 The
 .I int
-argument is converted to signed decimal notation. The precision, if any, gives the minimum number of digits that must appear; if the converted value requires fewer digits,
-it is padded on the left with zeros. The default precision is 1. When 0 is printed with an explicit precision 0, the output is empty.
+argument is converted to signed decimal notation.
 .TP
 .B %
 A '%' is written. No argument is converted. The complete conversion specification is '%%'.
-.SH NOTES
-Notes go here
+.TP
+.BR b
+The
+.I int
+argument is converted to binary.
+.TP
+.BR o ", " u ", " x ", " X
+The
+.I unsigned int
+The  unsigned  int argument is converted to unsigned octal (
+.B o
+), unsigned decimal (
+.B u
+), or unsigned hexadecimal (
+.B x
+and
+.B X
+) notation.  The letters abcdef are used for x conversions; the letters ABCDEF are used for X conversions.
+.TP
+.BR S
+Non printable characters (0 < ASCII value < 32 or >= 127) are printed this way:
+\(dq\\x\(dq, followed by the ASCII code value in hexadecimal (upper case - always 2 characters)
+.TP
+.BR p
+The
+.I void * pointer
+argument is printed in hexadecimal (as if by %#x or %#lx).
 .SH SEE ALSO
 .BR printf (3)
 .SH AUTHORS
